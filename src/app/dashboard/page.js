@@ -1,6 +1,6 @@
 "use client";
-
 import { useState } from "react";
+
 
 export default function Dashboard() {
     const [jobs, setJobs] = useState([
@@ -30,6 +30,14 @@ export default function Dashboard() {
         }
     ]);
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [newJob, setNewJob] = useState({
+        company: "",
+        role: "",
+        status: "Applied",
+    });
+
     const updateStatus = (id, newStatus) => {
         setJobs((prevJobs) =>
             prevJobs.map((job) =>
@@ -38,6 +46,21 @@ export default function Dashboard() {
         );
     };
 
+    const handleAddJob = (e) => {
+        e.preventDefault();
+
+        const job = {
+            id: Date.now(),
+            ...newJob,
+        };
+
+        setJobs((prev) => [...prev, job]);
+
+        setNewJob({ company: "", role: "", status: "Applied" });
+        setIsOpen(false);
+    };
+
+
     return (
         <main className="max-w-6xl mx-auto px-4 py-8">
 
@@ -45,7 +68,9 @@ export default function Dashboard() {
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Dashboard</h1>
 
-                <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition">
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition">
                     + Add Job
                 </button>
             </div>
@@ -62,30 +87,97 @@ export default function Dashboard() {
                             <p className="text-gray-500">{job.company}</p>
                         </div>
 
-                        {/* Status Dropdown */}
-                        <select
-                            value={job.status}
-                            onChange={(e) => updateStatus(job.id, e.target.value)}
-                            className={`px-3 py-1 ml-5 rounded-full text-sm ${job.status === "Applied"
-                                ? "bg-blue-100 text-blue-700"
-                                : job.status === "Interview"
-                                    ? "bg-yellow-100 text-yellow-700"
-                                    : job.status === "Offer"
-                                        ? "bg-green-100 text-green-700"
-                                    : job.status === "Rejected"
-                                        ?  "bg-red-100 text-red-700"
-                                        : "bg-white text-black"
-                                }`}
-                        >
-                            <option className="bg-blue-100 text-blue-700"value="Applied">Applied</option>
-                            <option className= "bg-yellow-100 text-yellow-700" value="Interview">Interview</option>
-                            <option className= "bg-green-100 text-green-700" value="Offer">Offer</option>
-                            <option className= "bg-red-100 text-red-700" value="Rejected">Rejected</option>
-                        </select>
+                        <div className="relative">
+                            <select
+                                value={job.status}
+                                onChange={(e) => updateStatus(job.id, e.target.value)}
+                                className={`border rounded-lg px-3 py-1 pr-8 ml-5 text-sm appearance-none ${job.status === "Applied"
+                                    ? "bg-blue-100 text-blue-700"
+                                    : job.status === "Interview"
+                                        ? "bg-yellow-100 text-yellow-700"
+                                        : job.status === "Offer"
+                                            ? "bg-green-100 text-green-700"
+                                            : job.status === "Rejected"
+                                                ? "bg-red-100 text-red-700"
+                                                : "bg-white text-black"
+                                    }`}
+                            >
+                                <option className="bg-blue-100 text-blue-700" value="Applied">Applied</option>
+                                <option className="bg-yellow-100 text-yellow-700" value="Interview">Interview</option>
+                                <option className="bg-green-100 text-green-700" value="Offer">Offer</option>
+                                <option className="bg-red-100 text-red-700" value="Rejected">Rejected</option>
+                            </select>
+                            <span className="text-black text-xs absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                                ▼
+                            </span>
+                        </div>
                     </div>
                 ))}
             </div>
 
+            {isOpen && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-xl w-full max-w-md">
+                        <h2 className="text-xl font-semibold mb-4">Add Job</h2>
+
+                        <form onSubmit={handleAddJob} className="flex flex-col gap-4">
+
+                            <input
+                                type="text"
+                                placeholder="Company"
+                                value={newJob.company}
+                                onChange={(e) =>
+                                    setNewJob({ ...newJob, company: e.target.value })
+                                }
+                                className="border p-2 rounded-lg"
+                                required
+                            />
+
+                            <input
+                                type="text"
+                                placeholder="Role"
+                                value={newJob.role}
+                                onChange={(e) =>
+                                    setNewJob({ ...newJob, role: e.target.value })
+                                }
+                                className="border p-2 rounded-lg"
+                                required
+                            />
+
+                            <select
+                                value={newJob.status}
+                                onChange={(e) =>
+                                    setNewJob({ ...newJob, status: e.target.value })
+                                }
+                                className="border p-2 rounded-lg"
+                            >
+                                <option>Applied</option>
+                                <option>Interview</option>
+                                <option>Offer</option>
+                                <option>Rejected</option>
+                            </select>
+
+                            <div className="flex justify-end gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsOpen(false)}
+                                    className="px-4 py-2 border rounded-lg"
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    className="bg-black text-white px-4 py-2 rounded-lg"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
         </main>
-    );
+    )
 }
