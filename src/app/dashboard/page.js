@@ -11,24 +11,28 @@ export default function Dashboard() {
             company: "Google",
             role: "Frontend Developer",
             status: "Applied",
+            dateApplied: "2026-03-26T18:30:00.000Z"
         },
         {
             id: 2,
             company: "Amazon",
             role: "Full Stack Engineer",
             status: "Interview",
+            dateApplied: "2026-03-24T18:30:00.000Z"
         },
         {
             id: 3,
             company: "Spotify",
             role: "UI Engineer",
             status: "Rejected",
+            dateApplied: "2026-03-20T18:30:00.000Z"
         },
         {
             id: 4,
             company: "Apple",
             role: "Frontend Dev",
             status: "Offer",
+            dateApplied: "2026-03-21T18:30:00.000Z"
         }
     ]);
 
@@ -62,6 +66,7 @@ export default function Dashboard() {
 
         const job = {
             id: Date.now(),
+            dateApplied: new Date().toISOString(),
             ...newJob,
         };
 
@@ -73,7 +78,7 @@ export default function Dashboard() {
 
 
     return (
-        <main className="board max-w-6xl mx-auto px-4 py-8">
+        <main className="board max-w-7xl mx-auto px-4 py-8">
 
             {/* Header */}
             <div className="flex justify-between items-center mb-8">
@@ -81,7 +86,7 @@ export default function Dashboard() {
 
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition">
+                    className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition">
                     + Add Job
                 </button>
             </div>
@@ -120,7 +125,7 @@ export default function Dashboard() {
                                         <select
                                             value={job.status}
                                             onChange={(e) => updateStatus(job.id, e.target.value)}
-                                            className={`border rounded-lg px-3 py-1 pr-8 ml-5 text-sm appearance-none ${job.status === "Applied"
+                                            className={`border rounded-lg px-3 py-1 pr-8 ml-5 text-sm appearance-none cursor-pointer ${job.status === "Applied"
                                                 ? "bg-blue-100 text-blue-700"
                                                 : job.status === "Interview"
                                                     ? "bg-yellow-100 text-yellow-700"
@@ -191,20 +196,22 @@ export default function Dashboard() {
                             </select>
 
                             <div className="flex justify-end gap-2">
-                                <button
+                                <motion.button
                                     type="button"
                                     onClick={() => setIsOpen(false)}
-                                    className="px-4 py-2 border rounded-lg"
+                                    whileHover={{ scale: 1.03}}
+                                    className="px-4 py-2 border rounded-lg cursor-pointer"
                                 >
                                     Cancel
-                                </button>
+                                </motion.button>
 
-                                <button
+                                <motion.button
                                     type="submit"
-                                    className="bg-black text-white px-4 py-2 rounded-lg"
+                                    whileHover={{ scale: 1.03}}
+                                    className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer"
                                 >
                                     Add
-                                </button>
+                                </motion.button>
                             </div>
                         </form>
                     </div>
@@ -215,12 +222,15 @@ export default function Dashboard() {
                 {selectedJob && (
                     <motion.div
                         className="fixed inset-0 bg-black/50 flex items-center justify-center"
+                        onClick={() => setSelectedJob(null)}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        
                     >
                         <motion.div
                             className="bg-white p-6 rounded-xl w-full max-w-md"
+                            onClick={(e) => e.stopPropagation()}
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
@@ -235,17 +245,22 @@ export default function Dashboard() {
                                 <strong>Company:</strong> {selectedJob.company}
                             </p>
 
-                            <p className="text-gray-600 mb-4">
+                            <p className="text-gray-600 mb-2">
                                 <strong>Status:</strong> {selectedJob.status}
                             </p>
 
+                            <p className="text-gray-600 mb-4">
+                                <strong>Date Applied:</strong> {new Date(selectedJob.dateApplied).toLocaleDateString()}
+                            </p>
+
                             <div className="flex justify-end">
-                                <button
+                                <motion.button
                                     onClick={() => setSelectedJob(null)}
-                                    className="px-4 py-2 border rounded-lg"
+                                    whileHover={{ scale: 1.03}}
+                                    className="px-4 py-2 border rounded-lg cursor-pointer"
                                 >
                                     Close
-                                </button>
+                                </motion.button>
                             </div>
                         </motion.div>
                     </motion.div>
