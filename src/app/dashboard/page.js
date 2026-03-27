@@ -84,11 +84,12 @@ export default function Dashboard() {
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Dashboard</h1>
 
-                <button
+                <motion.button
                     onClick={() => setIsOpen(true)}
+                    whileHover={{scale: 1.03}}
                     className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition">
                     + Add Job
-                </button>
+                </motion.button>
             </div>
 
             {/* Job List */}

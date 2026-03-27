@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
     return (
@@ -29,7 +30,7 @@ export default function Navbar() {
 
                     <Link
                         href="/register"
-                        className="bg-black text-white px-4 py-2 rounded-lg hover:bg-teal-950 hover:text-teal-200 transition"
+                        className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-teal-200 transition"
                     >
                         Sign Up
                     </Link>
