@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
+import Column from "@/components/Column";
+import JobCard from "@/components/JobCard";
+
 
 
 export default function Dashboard() {
@@ -38,9 +41,13 @@ export default function Dashboard() {
 
     const statuses = ["Applied", "Interview", "Offer", "Rejected"];
 
+    const sortedJobs = [...jobs].sort(
+        (a, b) => new Date(b.dateApplied) - new Date(a.dateApplied)
+    )
+
     const groupedJobs = statuses.map(status => ({
         status,
-        jobs: jobs.filter(job => job.status === status)
+        jobs: sortedJobs.filter(job => job.status === status)
     }));
 
     const [selectedJob, setSelectedJob] = useState(null);
@@ -86,7 +93,7 @@ export default function Dashboard() {
 
                 <motion.button
                     onClick={() => setIsOpen(true)}
-                    whileHover={{scale: 1.03}}
+                    whileHover={{ scale: 1.03 }}
                     className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition">
                     + Add Job
                 </motion.button>
@@ -95,62 +102,22 @@ export default function Dashboard() {
             {/* Job List */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {groupedJobs.map((group) => (
-                    <div key={group.status} className="bg-gray-50 p-4 rounded-xl">
-
-                        <h2 className="font-bold mb-4">{group.status}</h2>
-
-                        <div className="space-y-4">
-
-                            {group.jobs.length === 0 && (
-                                <p className="text-sm text-gray-400 text-center py-6 border border-dashed rounded-lg">
-                                    No jobs yet
-                                </p>
-                            )}
-
-                            {group.jobs.map((job) => (
-                                <motion.div
-                                    key={job.id}
-                                    onClick={() => setSelectedJob(job)}
-                                    layout
-                                    whileHover={{ scale: 1.02}}
-                                    className="bg-white p-4 rounded-xl shadow-sm border flex justify-between items-center cursor-pointer"
-                                >
-                                    <div>
-                                        <h2 className="font-semibold text-lg">{job.role}</h2>
-                                        <p className="text-gray-500">{job.company}</p>
-                                    </div>
-
-                                    <div className="relative"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <select
-                                            value={job.status}
-                                            onChange={(e) => updateStatus(job.id, e.target.value)}
-                                            className={`border rounded-lg px-3 py-1 pr-8 ml-5 text-sm appearance-none cursor-pointer ${job.status === "Applied"
-                                                ? "bg-blue-100 text-blue-700"
-                                                : job.status === "Interview"
-                                                    ? "bg-yellow-100 text-yellow-700"
-                                                    : job.status === "Offer"
-                                                        ? "bg-green-100 text-green-700"
-                                                        : job.status === "Rejected"
-                                                            ? "bg-red-100 text-red-700"
-                                                            : "bg-white text-black"
-                                                }`}
-                                        >
-                                            <option value="Applied">Applied</option>
-                                            <option value="Interview">Interview</option>
-                                            <option value="Offer">Offer</option>
-                                            <option value="Rejected">Rejected</option>
-                                        </select>
-
-                                        <span className="text-black text-xs absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
-                                            ▼
-                                        </span>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
+                    <Column
+                        key={group.status}
+                        status={group.status}
+                        jobs={group.jobs}
+                        setSelectedJob={setSelectedJob}
+                        updateStatus={updateStatus}
+                    >
+                        {group.jobs.map((job) => (
+                            <JobCard
+                                key={job.id}
+                                job={job}
+                                setSelectedJob={setSelectedJob}
+                                updateStatus={updateStatus}
+                            />
+                        ))}
+                    </Column>
                 ))}
             </div>
 
@@ -200,7 +167,7 @@ export default function Dashboard() {
                                 <motion.button
                                     type="button"
                                     onClick={() => setIsOpen(false)}
-                                    whileHover={{ scale: 1.03}}
+                                    whileHover={{ scale: 1.03 }}
                                     className="px-4 py-2 border rounded-lg cursor-pointer"
                                 >
                                     Cancel
@@ -208,7 +175,7 @@ export default function Dashboard() {
 
                                 <motion.button
                                     type="submit"
-                                    whileHover={{ scale: 1.03}}
+                                    whileHover={{ scale: 1.03 }}
                                     className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer"
                                 >
                                     Add
@@ -227,7 +194,7 @@ export default function Dashboard() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        
+
                     >
                         <motion.div
                             className="bg-white p-6 rounded-xl w-full max-w-md"
@@ -257,7 +224,7 @@ export default function Dashboard() {
                             <div className="flex justify-end">
                                 <motion.button
                                     onClick={() => setSelectedJob(null)}
-                                    whileHover={{ scale: 1.03}}
+                                    whileHover={{ scale: 1.03 }}
                                     className="px-4 py-2 border rounded-lg cursor-pointer"
                                 >
                                     Close
