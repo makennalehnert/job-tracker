@@ -10,12 +10,12 @@ let jobs = [
   },
 ];
 
-// ✅ GET all jobs
+// GET all jobs
 export async function GET() {
   return Response.json(jobs);
 }
 
-// ✅ CREATE a job
+// CREATE a job
 export async function POST(req) {
   const body = await req.json();
 
@@ -29,7 +29,7 @@ export async function POST(req) {
   return Response.json(newJob);
 }
 
-// ✅ UPDATE a job
+// UPDATE a job
 export async function PUT(req) {
   const body = await req.json();
 
@@ -44,7 +44,7 @@ export async function PUT(req) {
   return Response.json(jobs[index]);
 }
 
-// ✅ DELETE a job
+// DELETE a job
 export async function DELETE(req) {
   const body = await req.json();
 

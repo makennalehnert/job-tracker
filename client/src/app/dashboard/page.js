@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import Column from "@/components/Column";
-import JobCard from "@/components/JobCard";
-
-
 
 
 export default function Dashboard() {
@@ -117,6 +114,7 @@ export default function Dashboard() {
                         jobs={group.jobs}
                         setSelectedJob={setSelectedJob}
                         updateStatus={updateStatus}
+                        deleteJob={deleteJob}
                     />
                 ))}
             </div>
