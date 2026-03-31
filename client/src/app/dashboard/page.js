@@ -2,42 +2,25 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 import Column from "@/components/Column";
 import JobCard from "@/components/JobCard";
 
 
 
+
 export default function Dashboard() {
-    const [jobs, setJobs] = useState([
-        {
-            id: 1,
-            company: "Google",
-            role: "Frontend Developer",
-            status: "Applied",
-            dateApplied: "2026-03-26T18:30:00.000Z"
-        },
-        {
-            id: 2,
-            company: "Amazon",
-            role: "Full Stack Engineer",
-            status: "Interview",
-            dateApplied: "2026-03-24T18:30:00.000Z"
-        },
-        {
-            id: 3,
-            company: "Spotify",
-            role: "UI Engineer",
-            status: "Rejected",
-            dateApplied: "2026-03-20T18:30:00.000Z"
-        },
-        {
-            id: 4,
-            company: "Apple",
-            role: "Frontend Dev",
-            status: "Offer",
-            dateApplied: "2026-03-21T18:30:00.000Z"
-        }
-    ]);
+    const [jobs, setJobs] = useState([]);
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            const res = await fetch("/api/jobs");
+            const data = await res.json();
+            setJobs(data);
+        };
+
+        fetchJobs();
+    }, []);
 
     const statuses = ["Applied", "Interview", "Offer", "Rejected"];
 
@@ -60,24 +43,41 @@ export default function Dashboard() {
         status: "Applied",
     });
 
-    const updateStatus = (id, newStatus) => {
+    const updateStatus = async (id, newStatus) => {
+        const res = await fetch("/api/jobs", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id, status: newStatus }),
+        });
+
+        const updatedJob = await res.json();
+
         setJobs((prevJobs) =>
             prevJobs.map((job) =>
-                job.id === id ? { ...job, status: newStatus } : job
+                job.id === id ? updatedJob : job
             )
         );
     };
 
-    const handleAddJob = (e) => {
+    const handleAddJob = async (e) => {
         e.preventDefault();
 
-        const job = {
-            id: Date.now(),
-            dateApplied: new Date().toISOString(),
-            ...newJob,
-        };
+        const res = await fetch("/api/jobs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ...newJob,
+                dateApplied: new Date().toISOString(),
+            }),
+        });
 
-        setJobs((prev) => [...prev, job]);
+        const createdJob = await res.json();
+
+        setJobs((prev) => [...prev, createdJob]);
 
         setNewJob({ company: "", role: "", status: "Applied" });
         setIsOpen(false);
