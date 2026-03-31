@@ -28,7 +28,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus }) => {
                         e.stopPropagation();
                         // need to add delete function here
                     }}
-                    className="text-red-500 hover:bg-red-50 mb-2 p-2 rounded transition"
+                    className="text-red-500 hover:bg-red-50 mb-2.5 p-1.5 rounded-xl border transition"
                 >
                     <Trash2 size={17} />
                 </button>
