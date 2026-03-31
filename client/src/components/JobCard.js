@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 
-const JobCard = ({ job, setSelectedJob, updateStatus }) => {
+const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
 
 
 
@@ -26,7 +26,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus }) => {
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
-                        // need to add delete function here
+                        deleteJob(job.id);
                     }}
                     className="text-red-500 hover:bg-red-50 mb-2.5 p-1.5 rounded-xl border transition"
                 >

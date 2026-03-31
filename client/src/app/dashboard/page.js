@@ -83,6 +83,15 @@ export default function Dashboard() {
         setIsOpen(false);
     };
 
+    const deleteJob = async (id) => {
+        await fetch("/api/jobs", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id }),
+        });
+        setJobs((prev) => prev.filter((job) => job.id !== id));
+    };
+
 
     return (
         <main className="board max-w-7xl mx-auto px-4 py-8">
@@ -108,16 +117,7 @@ export default function Dashboard() {
                         jobs={group.jobs}
                         setSelectedJob={setSelectedJob}
                         updateStatus={updateStatus}
-                    >
-                        {group.jobs.map((job) => (
-                            <JobCard
-                                key={job.id}
-                                job={job}
-                                setSelectedJob={setSelectedJob}
-                                updateStatus={updateStatus}
-                            />
-                        ))}
-                    </Column>
+                    />
                 ))}
             </div>
 

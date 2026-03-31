@@ -2,7 +2,7 @@
 import JobCard from "./JobCard";
 
 
-const Column = ({ status, jobs = [], setSelectedJob, updateStatus }) => {
+const Column = ({ status, jobs = [], setSelectedJob, updateStatus, deleteJob }) => {
     return (
         <div className="bg-gray-50 p-4 rounded-xl">
             <h2 className="font-bold mb-4">{status}</h2>
@@ -18,6 +18,7 @@ const Column = ({ status, jobs = [], setSelectedJob, updateStatus }) => {
                         job={job}
                         setSelectedJob={setSelectedJob}
                         updateStatus={updateStatus}
+                        deleteJob={deleteJob}
                     />
                 ))
             )}
