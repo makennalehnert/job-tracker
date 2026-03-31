@@ -28,9 +28,9 @@ const JobCard = ({ job, setSelectedJob, updateStatus }) => {
                         e.stopPropagation();
                         // need to add delete function here
                     }}
-                    className="text-red-500 hover:bg-red-50 mb-2 p-2 rounded-full transition"
+                    className="text-red-500 hover:bg-red-50 mb-2 p-2 rounded transition"
                 >
-                    <Trash2 size={16} />
+                    <Trash2 size={17} />
                 </button>
                 {/* Status dropdown */}
                 <div
