@@ -61,6 +61,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus }) => {
                 </div>
             </div>
         </motion.div>
+        
     );
 };
 
