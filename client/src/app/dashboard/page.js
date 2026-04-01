@@ -100,7 +100,7 @@ export default function Dashboard() {
                 <motion.button
                     onClick={() => setIsOpen(true)}
                     whileHover={{ scale: 1.03 }}
-                    className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-800 transition">
+                    className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer transition">
                     + Add Job
                 </motion.button>
             </div>

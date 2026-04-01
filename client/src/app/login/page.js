@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const router = useRouter();
@@ -47,9 +48,9 @@ export default function Login() {
             required
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}
-          <button type="submit" className="bg-black text-white py-2 rounded-lg">
+          <motion.button type="submit" whileHover={{ scale:1.03 }}className="bg-black text-white py-2 rounded-lg cursor-pointer">
             Log in
-          </button>
+          </motion.button>
         </form>
         <p className="text-sm text-center mt-4">
           Don't have an account?{" "}
