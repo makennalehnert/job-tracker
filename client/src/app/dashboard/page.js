@@ -37,6 +37,7 @@ export default function Dashboard() {
     const [newJob, setNewJob] = useState({
         company: "",
         role: "",
+        location: "",
         status: "Applied",
     });
 
@@ -76,7 +77,7 @@ export default function Dashboard() {
 
         setJobs((prev) => [...prev, createdJob]);
 
-        setNewJob({ company: "", role: "", status: "Applied" });
+        setNewJob({ company: "", role: "", location: "", status: "Applied" });
         setIsOpen(false);
     };
 
@@ -148,6 +149,14 @@ export default function Dashboard() {
                                 required
                             />
 
+                            <input
+                                type="text"
+                                placeholder="Location (e.g. Remote, Chicago, IL)"
+                                value={newJob.location}
+                                onChange={(e) => setNewJob({ ...newJob, location: e.target.value })}
+                                className="border p-2 rounded-lg"
+                            />
+
                             <select
                                 value={newJob.status}
                                 onChange={(e) =>
@@ -210,6 +219,12 @@ export default function Dashboard() {
                             <p className="text-gray-600 mb-2">
                                 <strong>Company:</strong> {selectedJob.company}
                             </p>
+
+                            {selectedJob.location && (
+                                <p className="text-gray-600 mb-2">
+                                    <strong>Location:</strong> {selectedJob.location}
+                                </p>
+                            )}
 
                             <p className="text-gray-600 mb-2">
                                 <strong>Status:</strong> {selectedJob.status}

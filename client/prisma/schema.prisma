@@ -26,6 +26,7 @@ model Job {
   company     String
   role        String
   status      String   @default("Applied")
+  location    String?
   dateApplied DateTime @default(now())
   createdAt   DateTime @default(now())
   userId      Int
