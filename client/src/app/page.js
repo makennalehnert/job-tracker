@@ -1,10 +1,7 @@
-import Image from "next/image";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
-export default function Home() {
-  return (
-      <main className="w-full">
-        <h1>Job Tracker</h1>
-        <p>Welcome to the app</p>
-      </main>
-  );
+export default async function Home() {
+  const session = await auth();
+  redirect(session ? "/dashboard" : "/login");
 }
