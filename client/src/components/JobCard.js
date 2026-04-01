@@ -40,7 +40,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
                     <select
                         value={job.status}
                         onChange={(e) => updateStatus(job.id, e.target.value)}
-                        className={`border rounded-lg px-3 py-1 pr-8 ml-5 text-sm appearance-none cursor-pointer ${job.status === "Applied"
+                        className={`border rounded-lg px-3 py-1 pr-2 ml-5 text-sm cursor-pointer ${job.status === "Applied"
                                 ? "bg-blue-100 text-blue-700"
                                 : job.status === "Interview"
                                     ? "bg-yellow-100 text-yellow-700"
@@ -54,10 +54,6 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
                         <option value="Offer">Offer</option>
                         <option value="Rejected">Rejected</option>
                     </select>
-
-                    <span className="text-black text-xs absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
-                        ▼
-                    </span>
                 </div>
             </div>
         </motion.div>
