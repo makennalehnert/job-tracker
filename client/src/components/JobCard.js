@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 
 const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
+
     return (
         <motion.div
             onClick={() => setSelectedJob(job)}

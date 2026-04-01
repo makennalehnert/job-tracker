@@ -22,6 +22,7 @@ export async function POST(req) {
       company: body.company,
       role: body.role,
       status: body.status ?? "Applied",
+      location: body.location ?? null,
       dateApplied: new Date(),
       userId: Number(session.user.id),
     },
