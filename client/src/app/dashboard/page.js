@@ -96,7 +96,7 @@ export default function Dashboard() {
 
             {/* Header */}
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">Dashboard</h1>
+                <h1 className="text-3xl font-bold">Job Dashboard</h1>
 
                 <motion.button
                     onClick={() => setIsOpen(true)}
@@ -196,6 +196,7 @@ export default function Dashboard() {
             <AnimatePresence>
                 {selectedJob && (
                     <motion.div
+                        key="backdrop"
                         className="fixed inset-0 bg-black/50 flex items-center justify-center"
                         onClick={() => setSelectedJob(null)}
                         initial={{ opacity: 0 }}
@@ -204,6 +205,7 @@ export default function Dashboard() {
 
                     >
                         <motion.div
+                            key="modal"
                             className="bg-white p-6 rounded-xl w-full max-w-md"
                             onClick={(e) => e.stopPropagation()}
                             initial={{ scale: 0.9, opacity: 0 }}

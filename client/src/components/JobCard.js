@@ -26,10 +26,8 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
             </div>
 
             {/* Row 2: Company + Status dropdown */}
-            {/* Row 2: Company + Location on left, Status dropdown on right */}
             <div
                 className="flex justify-between items-center"
-                onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex flex-col">
                     <p className="text-gray-500 text-sm">{job.company}</p>
@@ -40,6 +38,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
                 <select
                     value={job.status}
                     onChange={(e) => updateStatus(job.id, e.target.value)}
+                    onClick={(e) => e.stopPropagation()}
                     className={`border rounded-lg px-2.5 py-1 text-sm cursor-pointer ${job.status === "Applied"
                         ? "bg-blue-100 text-blue-700"
                         : job.status === "Interview"
