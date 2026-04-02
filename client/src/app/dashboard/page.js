@@ -1,8 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 import Column from "@/components/Column";
 
 
@@ -38,6 +37,7 @@ export default function Dashboard() {
         company: "",
         role: "",
         location: "",
+        notes: "",
         status: "Applied",
     });
 
@@ -59,6 +59,16 @@ export default function Dashboard() {
         );
     };
 
+    const updateNotes = async (id, notes) => {
+        const res = await fetch("/api/jobs", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, notes }),
+        });
+        const updatedJob = await res.json();
+        setJobs((prev) => prev.map((job) => job.id === id ? updatedJob : job));
+    };
+
     const handleAddJob = async (e) => {
         e.preventDefault();
 
@@ -77,7 +87,7 @@ export default function Dashboard() {
 
         setJobs((prev) => [...prev, createdJob]);
 
-        setNewJob({ company: "", role: "", location: "", status: "Applied" });
+        setNewJob({ company: "", role: "", location: "", notes: "", status: "Applied" });
         setIsOpen(false);
     };
 
@@ -89,6 +99,18 @@ export default function Dashboard() {
         });
         setJobs((prev) => prev.filter((job) => job.id !== id));
     };
+
+    const notesRef = useRef("");
+
+    useEffect(() => {
+        notesRef.current = selectedJob?.notes ?? "";
+    }, [selectedJob?.id]);
+
+    const [notesValue, setNotesValue] = useState("");
+
+    useEffect(() => {
+        setNotesValue(selectedJob?.notes ?? "");
+    }, [selectedJob?.id]);
 
 
     return (
@@ -155,6 +177,13 @@ export default function Dashboard() {
                                 value={newJob.location}
                                 onChange={(e) => setNewJob({ ...newJob, location: e.target.value })}
                                 className="border p-2 rounded-lg"
+                            />
+
+                            <textarea
+                                placeholder="Notes (optional)"
+                                value={newJob.notes}
+                                onChange={(e) => setNewJob({ ...newJob, notes: e.target.value })}
+                                className="border p-2 rounded-lg resize-none h-24"
                             />
 
                             <select
@@ -231,6 +260,22 @@ export default function Dashboard() {
                             <p className="text-gray-600 mb-2">
                                 <strong>Status:</strong> {selectedJob.status}
                             </p>
+
+                            <div className="mb-4">
+                                <label className="text-gray-600 font-semibold block mb-1">Notes</label>
+                                <textarea
+                                    value={notesValue}
+                                    onChange={(e) => setNotesValue(e.target.value)}
+                                    onBlur={(e) => {
+                                        if (selectedJob) {
+                                            updateNotes(selectedJob.id, e.target.value);
+                                        }
+                                    }}
+                                    placeholder="Add notes..."
+                                    className="w-full border rounded-lg p-2 text-sm text-gray-600 resize-none h-28 focus:outline-none focus:ring-1 focus:ring-gray-300"
+                                />
+                                <p className="text-xs text-gray-400 mt-1">Notes save automatically when you click away</p>
+                            </div>
 
                             <p className="text-gray-600 mb-4">
                                 <strong>Date Applied:</strong> {new Date(selectedJob.dateApplied).toLocaleDateString()}

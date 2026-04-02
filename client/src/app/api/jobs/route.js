@@ -23,6 +23,7 @@ export async function POST(req) {
       role: body.role,
       status: body.status ?? "Applied",
       location: body.location ?? null,
+      notes: body.notes ?? null,
       dateApplied: new Date(),
       userId: Number(session.user.id),
     },
@@ -37,7 +38,10 @@ export async function PUT(req) {
   const body = await req.json();
   const job = await prisma.job.update({
     where: { id: body.id, userId: Number(session.user.id) },
-    data: { status: body.status },
+    data: {
+      ...(body.status && { status: body.status }),
+      ...(body.notes !== undefined && { notes: body.notes }),
+    },
   });
   return Response.json(job);
 }
