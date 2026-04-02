@@ -27,7 +27,7 @@ export default function Login() {
   };
 
   return (
-    <main className="flex items-center justify-center min-h-screen">
+    <main className="flex items-center justify-center min-h-[calc(100vh-60px)]">
       <div className="bg-white p-8 rounded-xl shadow w-full max-w-sm">
         <h1 className="text-2xl font-bold mb-6">Log in</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

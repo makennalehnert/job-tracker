@@ -11,7 +11,7 @@ export default async function Navbar() {
     };
 
     return (
-        <nav className="border-b bg-teal-700">
+        <nav className="border-b bg-teal-700 h-16">
             <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
                 <Link href="/" className="text-xl font-bold text-white hover:text-teal-100">
                     JobTracker
