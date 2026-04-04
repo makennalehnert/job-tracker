@@ -65,6 +65,14 @@ export default function Dashboard() {
         jobs: sortedJobs.filter(job => job.status === status)
     }));
 
+    const stats = {
+        total: jobs.length,
+        applied: jobs.filter(j => j.status === "Applied").length,
+        interviews: jobs.filter(j => j.status === "Interview").length,
+        offers: jobs.filter(j => j.status === "Offer").length,
+        rejections: jobs.filter(j => j.status === "Rejected").length,
+    };
+
     const [selectedJob, setSelectedJob] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [newJob, setNewJob] = useState({
@@ -158,6 +166,25 @@ export default function Dashboard() {
                     + Add Job
                 </motion.button>
             </div>
+
+            {/* Stats Cards */}
+            <dl className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+                {[
+                    { label: "Total", value: stats.total, color: "bg-white" },
+                    { label: "Applied", value: stats.applied, color: "bg-blue-50" },
+                    { label: "Interviews", value: stats.interviews, color: "bg-yellow-50" },
+                    { label: "Offers", value: stats.offers, color: "bg-green-50" },
+                    { label: "Rejections", value: stats.rejections, color: "bg-red-50" },
+                ].map(({ label, value, color }) => (
+                    <div
+                        key={label}
+                        className={`${color} rounded-xl px-4 py-3 shadow-sm flex items-center justify-between gap-2`}
+                    >
+                        <dt className="text-sm text-gray-500">{label}</dt>
+                        <dd className="text-xl font-bold">{value}</dd>
+                    </div>
+                ))}
+            </dl>
 
             {/* Job List */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
