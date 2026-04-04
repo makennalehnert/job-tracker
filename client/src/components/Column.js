@@ -1,29 +1,44 @@
 "use client";
 import JobCard from "./JobCard";
 
-
 const Column = ({ status, jobs = [], setSelectedJob, updateStatus, deleteJob }) => {
     return (
-        <div className="bg-gray-50 p-4 rounded-xl">
-            <h2 className="font-bold mb-4">{status}</h2>
+        <section
+            aria-label={`${status} jobs, ${jobs.length} ${jobs.length === 1 ? "job" : "jobs"}`}
+            className="bg-gray-50 p-4 rounded-xl"
+        >
+            <h2 className="font-bold mb-4" id={`column-${status}`}>
+                {status}
+                <span className="sr-only"> — {jobs.length} {jobs.length === 1 ? "job" : "jobs"}</span>
+            </h2>
 
             {jobs.length === 0 ? (
-                <div className="text-gray-400 text-sm text-center py-6 border border-dashed rounded-lg">
+                <div
+                    role="status"
+                    aria-live="polite"
+                    className="text-gray-400 text-sm text-center py-6 border border-dashed rounded-lg"
+                >
                     No jobs
                 </div>
             ) : (
-                jobs.map((job) => (
-                    <JobCard
-                        key={job.id}
-                        job={job}
-                        setSelectedJob={setSelectedJob}
-                        updateStatus={updateStatus}
-                        deleteJob={deleteJob}
-                    />
-                ))
+                <ul
+                    aria-labelledby={`column-${status}`}
+                    className="list-none p-0 m-0"
+                >
+                    {jobs.map((job) => (
+                        <li key={job.id}>
+                            <JobCard
+                                job={job}
+                                setSelectedJob={setSelectedJob}
+                                updateStatus={updateStatus}
+                                deleteJob={deleteJob}
+                            />
+                        </li>
+                    ))}
+                </ul>
             )}
-        </div>
+        </section>
     );
 };
 
-export default Column; 
+export default Column;
