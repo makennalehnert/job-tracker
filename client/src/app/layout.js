@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-teal-100">
+      <body className="min-h-full flex flex-col bg-teal-50">
 
         {/* Skip to main content - first focusable element on every page */}
         <a

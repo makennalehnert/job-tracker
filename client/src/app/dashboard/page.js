@@ -186,7 +186,7 @@ export default function Dashboard() {
                         aria-modal="true"
                         aria-labelledby="add-job-title"
                         data-modal
-                        className="bg-white p-6 rounded-xl w-full max-w-md"
+                        className="bg-teal-50 p-6 rounded-xl w-full max-w-md"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h2 id="add-job-title" className="text-xl font-semibold mb-4">
@@ -204,7 +204,7 @@ export default function Dashboard() {
                                     placeholder="e.g. Google"
                                     value={newJob.company}
                                     onChange={(e) => setNewJob({ ...newJob, company: e.target.value })}
-                                    className="border p-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="border p-2 rounded-lg bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                     required
                                 />
                             </div>
@@ -219,7 +219,7 @@ export default function Dashboard() {
                                     placeholder="e.g. Frontend Developer"
                                     value={newJob.role}
                                     onChange={(e) => setNewJob({ ...newJob, role: e.target.value })}
-                                    className="border p-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="border p-2 rounded-lg bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                     required
                                 />
                             </div>
@@ -234,7 +234,7 @@ export default function Dashboard() {
                                     placeholder="e.g. Remote, Chicago, IL"
                                     value={newJob.location}
                                     onChange={(e) => setNewJob({ ...newJob, location: e.target.value })}
-                                    className="border p-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="border p-2 rounded-lg bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 />
                             </div>
 
@@ -247,7 +247,7 @@ export default function Dashboard() {
                                     placeholder="Any notes about this application..."
                                     value={newJob.notes}
                                     onChange={(e) => setNewJob({ ...newJob, notes: e.target.value })}
-                                    className="border p-2 rounded-lg resize-none h-24 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="border p-2 rounded-lg bg-white resize-none h-24 focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 />
                             </div>
 
@@ -259,7 +259,7 @@ export default function Dashboard() {
                                     id="status"
                                     value={newJob.status}
                                     onChange={(e) => setNewJob({ ...newJob, status: e.target.value })}
-                                    className="border p-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="border p-2 rounded-lg bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 >
                                     <option>Applied</option>
                                     <option>Interview</option>
@@ -273,14 +273,14 @@ export default function Dashboard() {
                                     type="button"
                                     onClick={() => setIsOpen(false)}
                                     whileHover={{ scale: 1.03 }}
-                                    className="px-4 py-2 border rounded-lg cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="px-4 py-2 border rounded-lg bg-white cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 >
                                     Cancel
                                 </motion.button>
                                 <motion.button
                                     type="submit"
                                     whileHover={{ scale: 1.03 }}
-                                    className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 >
                                     Add
                                 </motion.button>
@@ -309,7 +309,7 @@ export default function Dashboard() {
                             aria-modal="true"
                             aria-labelledby="job-details-title"
                             data-modal
-                            className="bg-white p-6 rounded-xl w-full max-w-md"
+                            className="bg-teal-50 p-6 rounded-xl w-full max-w-md"
                             onClick={(e) => e.stopPropagation()}
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
@@ -361,7 +361,7 @@ export default function Dashboard() {
                                         if (selectedJob) updateNotes(selectedJob.id, e.target.value);
                                     }}
                                     placeholder="Add notes..."
-                                    className="w-full border rounded-lg p-2 text-sm text-gray-600 resize-none h-28 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="w-full border rounded-lg bg-white p-2 text-sm text-gray-600 resize-none h-28 focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 />
                                 <p className="text-xs text-gray-400 mt-1" aria-live="polite">
                                     Notes save automatically when you click away
@@ -372,7 +372,7 @@ export default function Dashboard() {
                                 <motion.button
                                     onClick={() => setSelectedJob(null)}
                                     whileHover={{ scale: 1.03 }}
-                                    className="px-4 py-2 border rounded-lg cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                                    className="px-4 py-2 border rounded-lg bg-white cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                 >
                                     Close
                                 </motion.button>

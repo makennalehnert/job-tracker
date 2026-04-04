@@ -5,7 +5,7 @@ const Column = ({ status, jobs = [], setSelectedJob, updateStatus, deleteJob }) 
     return (
         <section
             aria-label={`${status} jobs, ${jobs.length} ${jobs.length === 1 ? "job" : "jobs"}`}
-            className="bg-gray-50 p-4 rounded-xl"
+            className="bg-white p-4 rounded-xl shadow"
         >
             <h2 className="font-bold mb-4" id={`column-${status}`}>
                 {status}

@@ -13,7 +13,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
             <div className="flex justify-between items-center">
                 <button
                     onClick={() => setSelectedJob(job)}
-                    className="font-semibold text-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded cursor-pointer"
+                    className="font-semibold text-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded cursor-pointer"
                     aria-label={`View details for ${job.role} at ${job.company}`}
                 >
                     {job.role}
@@ -52,7 +52,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
                         value={job.status}
                         onChange={(e) => updateStatus(job.id, e.target.value)}
                         onClick={(e) => e.stopPropagation()}
-                        className={`border rounded-lg px-2.5 py-1 text-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 ${
+                        className={`border rounded-lg px-2.5 py-1 text-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-black ${
                             job.status === "Applied"
                                 ? "bg-blue-100 text-blue-700"
                                 : job.status === "Interview"
