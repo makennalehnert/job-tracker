@@ -13,7 +13,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
             <div className="flex justify-between items-center">
                 <button
                     onClick={() => setSelectedJob(job)}
-                    className="font-semibold text-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded cursor-pointer"
+                    className="font-semibold text-lg text-left pr-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded cursor-pointer"
                     aria-label={`View details for ${job.role} at ${job.company}`}
                 >
                     {job.role}
@@ -33,7 +33,7 @@ const JobCard = ({ job, setSelectedJob, updateStatus, deleteJob }) => {
 
             {/* Row 2: Company + Location on left, Status dropdown on right */}
             <div className="flex justify-between items-center">
-                <div className="flex flex-col">
+                <div className="flex flex-col pr-1.5">
                     <p className="text-gray-500 text-sm">{job.company}</p>
                     {job.location && (
                         <p className="text-gray-400 text-xs">{job.location}</p>
