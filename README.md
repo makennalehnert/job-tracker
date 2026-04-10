@@ -8,7 +8,7 @@ A full stack web application for organizing and tracking job applications during
 
 ## Screenshot
 
-**![JobTracker Dashboard](images/dashboard.png)**
+![JobTracker Dashboard](images/dashboard.png)
 
 ## Features
 
