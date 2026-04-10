@@ -14,17 +14,24 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    setError("");
 
-    if (res?.ok) {
-      router.push("/dashboard");
-      router.refresh();
-    } else {
-      setError("Invalid email or password");
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (!res?.error && res?.ok) {
+        router.push("/dashboard");
+        router.refresh();
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
       setLoading(false);
     }
   };
