@@ -8,9 +8,11 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const res = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -22,6 +24,7 @@ export default function Register() {
     } else {
       const data = await res.json();
       setError(data.error || "Something went wrong");
+      setLoading(false);
     }
   };
 
@@ -80,9 +83,19 @@ export default function Register() {
           <motion.button
             type="submit"
             whileHover={{ scale: 1.03 }}
-            className="bg-black text-white py-2 rounded-lg cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+            className="bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
           >
-            Register
+            {loading ? (
+              <>
+                <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                <span>Registering...</span>
+              </>
+            ) : (
+              "Register"
+            )}
           </motion.button>
         </form>
 
