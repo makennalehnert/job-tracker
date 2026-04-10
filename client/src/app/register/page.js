@@ -68,6 +68,7 @@ export default function Register() {
               autoComplete="new-password"
               required
             />
+            <p className="text-xs text-gray-400 mt-1">Must be at least 8 characters</p>
           </div>
 
           {error && (

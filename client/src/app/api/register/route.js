@@ -10,6 +10,12 @@ export async function POST(req) {
   }
 
   const hashed = await bcrypt.hash(password, 10);
+  if (password.length < 8) {
+    return Response.json(
+      { error: "Password must be at least 8 characters"},
+      { status: 400}
+    );
+  }
 
   const user = await prisma.user.create({
     data: { email, password: hashed },
