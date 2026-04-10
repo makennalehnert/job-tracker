@@ -8,13 +8,7 @@ A full stack web application for organizing and tracking job applications during
 
 ## Screenshot
 
-<<<<<<< HEAD
-![JobTracker Dashboard](images/dashboard.png)
-=======
-<img width="1788" height="967" alt="job-tracker dashboard screenshot" src="https://github.com/user-attachments/assets/73078272-eaa8-4ec0-ba7e-a974ce1aeb62" />
-
----
->>>>>>> c7ea84f08886d166f635fecd0a15ea46fc2825bc
+**![JobTracker Dashboard](images/dashboard.png)**
 
 ## Features
 
