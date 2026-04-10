@@ -6,11 +6,9 @@ A full stack web application for organizing and tracking job applications during
 
 ---
 
-## Screenshots
+## Screenshot
 
-> _Add a screenshot of your dashboard here by dragging an image into the GitHub README editor_
-
----
+![JobTracker Dashboard](images/dashboard.png)
 
 ## Features
 
